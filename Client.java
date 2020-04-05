@@ -8,7 +8,7 @@ import java.net.*;
 public class Client {
     public static void main(String[] args) {
         try {
-            Socket s = new Socket("127.0.0.1",1301);
+            Socket s = new Socket("192.168.1.9",1302);
             DataInputStream din = new DataInputStream(s.getInputStream());
             DataOutputStream dout = new DataOutputStream(s.getOutputStream());
             

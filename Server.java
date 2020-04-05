@@ -1,34 +1,33 @@
+/**
+ *
+ * @author Amir Altakroori
+ */
+
+package socketsProject
+
 import java.io.*;
 import java.net.*;
 
-/**
- *
- * @author AnA
- */
 public class Server {
 
     public static void main(String[] args) {
+        System.out.println("Server:");
         try {
-            ServerSocket ss = new ServerSocket(1301);
-            Socket s = ss.accept();
-            
-            DataInputStream din = new DataInputStream(s.getInputStream());
-            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-            
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String msgin = "", msgout="";
-            while (!msgin.equals(("end"))) {
-                msgin = din.readUTF();
-                System.out.println(msgin);
-                msgout = br.readLine();
-                dout.writeUTF(msgout);
-                dout.flush();
+            ServerSocket ss = new ServerSocket(1302);
+            Socket s = ss.accept();;
+            while (true) {
+                s = ss.accept();
+
+                new Thread(new Reading(s)).start();
+                
             }
-            s.close();
-            
+
         } catch (Exception e) {
-System.out.println(e);
+            System.out.println(e);
         }
     }
+
     
+        
+
 }
